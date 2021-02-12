@@ -59,7 +59,7 @@ public class Translator {
      * @return model resource model
      */
     static ResourceModel translateFromReadResponse(final DescribeLogStreamsResponse response, final ResourceModel model) {
-        if (response.hasLogStreams()) {
+        if (response.logStreams().size() > 0) {
             // we call DescribeLogStreams using the log stream name as a prefix & receive a list sorted by StreamName,
             // so a perfect match (if present) must be the first item
             if (Objects.equals(model.getLogStreamName(), response.logStreams().get(0).logStreamName())) {

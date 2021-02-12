@@ -57,7 +57,7 @@ _Minimum_: <code>1</code>
 
 _Maximum_: <code>512</code>
 
-_Pattern_: <code>^[^:*]*$</code>
+_Pattern_: <code>^[^:*]+$</code>
 
 _Update requires_: [Replacement](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-replacement)
 

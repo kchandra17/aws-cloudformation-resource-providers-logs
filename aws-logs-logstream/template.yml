@@ -13,6 +13,7 @@ Resources:
       Handler: software.amazon.logs.logstream.HandlerWrapper::handleRequest
       Runtime: java8
       CodeUri: ./target/aws-logs-logstream-handler-1.0-SNAPSHOT.jar
+      MemorySize: 256
 
   TestEntrypoint:
     Type: AWS::Serverless::Function
@@ -20,4 +21,5 @@ Resources:
       Handler: software.amazon.logs.logstream.HandlerWrapper::testEntrypoint
       Runtime: java8
       CodeUri: ./target/aws-logs-logstream-handler-1.0-SNAPSHOT.jar
+      MemorySize: 256
 

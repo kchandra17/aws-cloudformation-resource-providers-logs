@@ -1,0 +1,4 @@
+{
+	"LogGroupName": "",    # must be a real log stream in account
+	"LogStreamName": "test-log-stream"
+}

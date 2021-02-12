@@ -18,7 +18,7 @@
     "LogStreamName" : {
       "type" : "string",
         "description": "The name of the log stream. The name must be unique within the log group.",
-        "pattern": "^[^:*]*$",
+        "pattern": "^[^:*]+$",
         "minLength": 1,
         "maxLength": 512
     }

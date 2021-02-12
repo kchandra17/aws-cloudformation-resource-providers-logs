@@ -2,8 +2,16 @@ package software.amazon.logs.logstream;
 
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.services.cloudwatchlogs.CloudWatchLogsClient;
+import software.amazon.awssdk.services.cloudwatchlogs.model.InvalidParameterException;
+import software.amazon.awssdk.services.cloudwatchlogs.model.LimitExceededException;
+import software.amazon.awssdk.services.cloudwatchlogs.model.OperationAbortedException;
 import software.amazon.awssdk.services.cloudwatchlogs.model.ResourceAlreadyExistsException;
+import software.amazon.awssdk.services.cloudwatchlogs.model.ServiceUnavailableException;
 import software.amazon.cloudformation.exceptions.CfnAlreadyExistsException;
+import software.amazon.cloudformation.exceptions.CfnInvalidRequestException;
+import software.amazon.cloudformation.exceptions.CfnServiceLimitExceededException;
+import software.amazon.cloudformation.exceptions.CfnResourceConflictException;
+import software.amazon.cloudformation.exceptions.CfnServiceInternalErrorException;
 import software.amazon.cloudformation.proxy.AmazonWebServicesClientProxy;
 import software.amazon.cloudformation.proxy.Logger;
 import software.amazon.cloudformation.proxy.ProgressEvent;
@@ -33,6 +41,14 @@ public class CreateHandler extends BaseHandlerStd {
                             return cwProxyClient.injectCredentialsAndInvokeV2(logStreamRequest, cwProxyClient.client()::createLogStream);
                         } catch (final ResourceAlreadyExistsException e) {
                             throw new CfnAlreadyExistsException(e);
+                        } catch (final InvalidParameterException e) {
+                            throw new CfnInvalidRequestException(ResourceModel.TYPE_NAME, e);
+                        } catch (final LimitExceededException e) {
+                            throw new CfnServiceLimitExceededException(e);
+                        } catch (final OperationAbortedException e) {
+                            throw new CfnResourceConflictException(e);
+                        } catch (final ServiceUnavailableException e) {
+                            throw new CfnServiceInternalErrorException(e);
                         }
                     })
                     .progress())
